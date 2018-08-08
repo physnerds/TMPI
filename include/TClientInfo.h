@@ -1,3 +1,18 @@
+
+//A TMemFile that utilizes MPI Libraries to create and Merge ROOT Files
+
+
+ // @(#)root/io:$Id$
+ // Author: Amit Bashyal, August 2018
+ 
+ /*************************************************************************
+  * Copyright (C) 1995-2009, Rene Brun and Fons Rademakers.               *
+  * All rights reserved.                                                  *
+  *                                                                       *
+  * For the licensing terms see $ROOTSYS/LICENSE.                         *
+  * For the list of contributors see $ROOTSYS/README/CREDITS.             *
+  *************************************************************************/
+//Client Information (To handle the worker information)
 #ifndef ROOT_TClientInfo
 #define ROOT_TClientInfo
 
