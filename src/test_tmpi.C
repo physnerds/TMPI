@@ -47,24 +47,20 @@ TTree *tree = new TTree("tree","tree");
      gRandom->Rannor(px,py);
      sleep = abs(gRandom->Gaus(10,5));
      //sleep after every events to simulate the reconstruction time... 
-     std::this_thread::sleep_for(std::chrono::seconds(sleep));
+     //std::this_thread::sleep_for(std::chrono::seconds(sleep));
      reco_time=sleep;
      tree->Fill();
       //at the end of the event loop...put the sync function
       //************START OF SYNCING IMPLEMENTATION FROM USERS' SIDE**********************
-       if(i%sync_rate==0){
+     if((i+1)%sync_rate==0){
 	    newfile->Sync(); //this one as a worker...
 	    tree->Reset();
 	      }
+
+   }
    //do the syncing one more time
-	      if(i%sync_rate==0){
-	     if(i==tot_entries-1){
-	     newfile->Sync(); //to make sure that the final bit also gets written.   
-	      }
-	     }
-	      //************END OF SYNCING IMPLEMENTATION FROM USERS' SIDE***********************
-}
- 
+   if(tot_entries%sync_rate!=0)newfile->Sync(); 
+   //************END OF SYNCING IMPLEMENTATION FROM USERS' SIDE***********************
  }
  newfile->MPIClose();
 }
